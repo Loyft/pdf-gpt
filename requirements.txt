@@ -1,0 +1,5 @@
+PyPDF2
+openai
+tqdm
+colorama
+python-dotenv

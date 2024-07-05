@@ -1,0 +1,8 @@
+.env
+.gitattributes
+
+# Test files
+poem.pdf
+translated_text.txt
+
+.DS_Store
