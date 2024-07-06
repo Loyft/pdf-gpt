@@ -1,24 +1,28 @@
-# GPT Translation Script for PDF
+# 📄 GPT Translation Script for large PDF files
 
-This script provides an automated way to translate the text content of large PDF files from any language to any language using OpenAI's language models. It features an interactive console interface that allows users to choose between different GPT models, receive cost estimates before processing, and confirm continuation based on those estimates.
+This script provides an automated way to translate the text content of large PDF files from any language to any language using OpenAI's GPT models.
 
-## Features
+**Update:**  It now features a PyQt5 GUI that allows for drag-and-drop PDF functionality, making it more user-friendly and interactive. The GUI includes features like real-time progress updates, model selection, and cost prediction before translations are processed.
 
-- **PDF Reading**: Extracts text from PDF files.
-- **Language Translation**: Translates text to any language utilizing OpenAI's GPT models.
-- **Model Selection**: Users can switch between GPT-3.5-turbo and GPT-4 models.
-- **Cost Estimation**: Provides an estimated and actual cost analysis based on the number of tokens processed.
-- **Progress Tracking**: Shows translation progress via a progress bar.
-- **Interactive Confirmation**: Users can confirm or cancel the translation based on the estimated costs.
+## 🌟 Features
 
-## Prerequisites
+- **🖱 Drag-and-Drop Interface**: Easily drag and drop PDF files into the GUI.
+- **📖 PDF Reading**: Extracts text from PDF files.
+- **🌍 Language Translation**: Translates text to any language utilizing OpenAI's GPT models with input for target language.
+- **🔄 Model Selection**: Users can choose between GPT-3.5-turbo and GPT-4o models through a dropdown menu.
+- **💰 Cost Estimation**: Provides an estimated and actual cost analysis based on the number of tokens processed.
+- **📈 Progress Tracking**: Shows translation progress in the GUI's console window.
+- **✅ Interactive Confirmation**: Users can confirm or cancel the translation based on the estimated costs directly from the GUI.
+- **📝 File Output**: Translated text is saved to `translated_text.txt`, with an option to open this file directly from the GUI.
+
+## 📋 Prerequisites
 
 Before running the script, ensure the following prerequisites are met:
 - Python 3.6 or higher is installed on your system.
 - An active OpenAI API key is required.
-- Python libraries: `PyPDF2`, `openai`, `tqdm`, `colorama`, `python-dotenv`
+- Python libraries: `PyPDF2`, `openai`, `tqdm`, `colorama`, `python-dotenv`, `PyQt5`
 
-## Installation
+## ⚙️ Installation
 
 1. **Clone the repository**:
    ```
@@ -28,7 +32,7 @@ Before running the script, ensure the following prerequisites are met:
 
 2. **Install required libraries**:
    ```
-   pip install PyPDF2 openai tqdm colorama python-dotenv
+   pip install PyPDF2 openai tqdm colorama python-dotenv PyQt5
    ```
 
 3. **Set up environment variables**:
@@ -37,10 +41,10 @@ Before running the script, ensure the following prerequisites are met:
   - Add your OpenAI API key to the `.env` file:
 
      ```
-    OPENAI_API_KEY='your_api_key_here'
+    OPENAI_API_KEY=your_api_key_here
      ```
 
-## Usage
+## 🚀 Usage
 
 To use the script, navigate to the script's directory and run:
 ```
@@ -49,24 +53,29 @@ python main.py
 
 ### Steps
 
-1. **Input the path to your PDF file** when prompted.
-2. **Choose the model** for translation by entering `/gpt3` for gpt-3.5-turbo or `/gpt4` for gpt-4o. If no input is given, the script defaults to using GPT-3.5-turbo.
-3. **Review the cost estimate** that will be displayed based on the text content of the PDF. (more or less accurate depending on original and target language)
-4. **Confirm to proceed** with translation; the default option is 'yes', simply press Enter to continue, or type 'n' or 'no' to cancel.
-5. **Check the results** in the output file named `translated_text.txt` once the translation is complete.
+1. **Drag and drop a PDF file** into the GUI area designated for it.
+2. **Select the translation model** from the dropdown menu.
+3. **Enter the target language** for translation.
+4. **Review the estimated cost** displayed in the GUI's console area.
+5. **Confirm to proceed** with the translation by clicking the translate button.
+6. **Open the translated text file** using the button provided once the translation is complete.
 
-## Output
+## 📤 Output
 
-The script will output the translated text into a file named `translated_text.txt` in the script's directory. It also prints out the cost details and the number of tokens used for the translation.
+The script will save the translated text into a file named `translated_text.txt` in the script's directory. It also displays the cost details and the number of tokens used for the translation in the GUI's console.
 
-## Contributing
+## 🖥 System Compatibility
+
+- **Tested on macOS**: This application has been tested on macOS and might require modifications to run on other operating systems.
+
+## 🤝 Contributing
 
 Contributions to enhance the script, improve efficiency, or add new features are welcome. Please fork the repository and submit a pull request with your updates.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Support
+## 🆘 Support
 
 For support, raise an issue in the repository.
