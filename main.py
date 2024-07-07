@@ -84,7 +84,7 @@ class PDFDropWidget(QWidget):
         if model == "gpt-3.5-turbo":
             input_cost = prompt_tokens * 0.50 / 1000000
             output_cost = completion_tokens * 1.50 / 1000000
-        elif model == "gpt-4":
+        elif model == "gpt-4o":
             input_cost = prompt_tokens * 5.00 / 1000000
             output_cost = completion_tokens * 15.00 / 1000000
         total_cost = input_cost + output_cost
