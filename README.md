@@ -1,81 +1,157 @@
-# 📄 GPT Translation Script for large PDF files
+# PDF GPT - Local LLM Translation Tool
 
-This script provides an automated way to translate the text content of large PDF files from any language to any language using OpenAI's GPT models.
+<div align="center" style="margin-bottom: 20px;">
+Open Source, free (as in freedom), PDF Translation tool using a locally running LLM via ollama.
+</div>
 
-**Update:**  It now features a PyQt5 GUI that allows for drag-and-drop PDF functionality, making it more user-friendly and interactive. The GUI includes features like real-time progress updates, model selection, and cost prediction before translations are processed.
+<div align="center">
+  <img src="pdf_translate_1.png" alt="PDF GPT Interface" style="max-width: 500px;">
+</div>
 
-## 🌟 Features
+## Overview
 
-- **🖱 Drag-and-Drop Interface**: Easily drag and drop PDF files into the GUI.
-- **📖 PDF Reading**: Extracts text from PDF files.
-- **🌍 Language Translation**: Translates text to any language utilizing OpenAI's GPT models with input for target language.
-- **🔄 Model Selection**: Users can choose between GPT-3.5-turbo and GPT-4o models through a dropdown menu.
-- **💰 Cost Estimation**: Provides an estimated and actual cost analysis based on the number of tokens processed.
-- **📈 Progress Tracking**: Shows translation progress in the GUI's console window.
-- **✅ Interactive Confirmation**: Users can confirm or cancel the translation based on the estimated costs directly from the GUI.
-- **📝 File Output**: Translated text is saved to `translated_text.txt`, with an option to open this file directly from the GUI.
+PDF GPT is a PyQt5-based desktop application that extracts text from PDF files and translates it to any target language using locally running Ollama language models. The application features a modern, intuitive interface with drag-and-drop functionality, real-time progress tracking, and seamless background processing.
 
-## 📋 Prerequisites
+## Table of Contents
 
-Before running the script, ensure the following prerequisites are met:
-- Python 3.6 or higher is installed on your system.
-- An active OpenAI API key is required.
-- Python libraries: `PyPDF2`, `openai`, `tqdm`, `colorama`, `python-dotenv`, `PyQt5`
+- [Prerequisites](#-prerequisites)
+- [Installation](#️-installation)
+- [Ollama](#starting-ollama)
+- [Usage](#usage)
+- [Changelog](#changelog)
+- [Contributing](#-contributing)
+- [License](#-license)
 
-## ⚙️ Installation
+## Prerequisites
+
+Before running the application, ensure you have:
+
+- **Python 3.6 or higher** installed on your system
+- **Ollama** installed and at least one model downloaded (see installation steps below)
+- **Required Python packages**: `PyPDF2`, `ollama`, `PyQt5`, `requests` (see installation steps)
+
+## Installation
+
+### Step 1: Install Ollama
+
+1. Visit [https://ollama.ai](https://ollama.ai) and download Ollama for your operating system
+2. Install Ollama following the instructions for your platform
+3. Verify installation by opening a terminal and running:
+   ```bash
+   ollama --version
+   ```
+
+### Step 2: Download an Ollama Model
+
+Before using the application, you need to download at least one Ollama model. Recommended models:
+
+```bash
+# Small, fast model (good for testing)
+ollama pull gemma3:1b
+
+# Medium-sized, balanced model
+ollama pull llama2
+
+# Larger, more capable model
+ollama pull mistral
+```
+
+You can browse all available models at [https://ollama.ai/library](https://ollama.ai/library).
+
+### Step 3: Install Python Dependencies
 
 1. **Clone the repository**:
-   ```
+   ```bash
    git clone https://github.com/loyft/pdf-gpt.git
    cd pdf-gpt
    ```
 
-2. **Install required libraries**:
+2. **Install required Python libraries**:
+   ```bash
+   pip install -r requirements.txt
    ```
-   pip install PyPDF2 openai tqdm colorama python-dotenv PyQt5
-   ```
-
-3. **Set up environment variables**:
    
-  - Create a `.env` file in the script directory.
-  - Add your OpenAI API key to the `.env` file:
+   Or install manually:
+   ```bash
+   pip install PyPDF2 ollama PyQt5 requests
+   ```
 
-     ```
-    OPENAI_API_KEY=your_api_key_here
-     ```
+## Starting Ollama
 
-## 🚀 Usage
+**Important**: Ollama must be running before you start the PDF GPT application.
 
-To use the script, navigate to the script's directory and run:
+### How to Start Ollama
+
+**Option 1: Desktop Application (Recommended)**
+- **macOS**: Launch Ollama from Applications folder. It will start automatically in the background.
+- **Windows**: Launch Ollama from the Start menu. The app runs in the system tray.
+- **Linux**: Launch the Ollama desktop app if installed.
+
+**Option 2: Command Line**
+- Open a terminal and run:
+  ```bash
+  ollama serve
+  ```
+  Keep this terminal window open while using the PDF GPT.
+
+### Verify Ollama is Running
+
+To verify Ollama is running correctly, open a terminal and run:
+
+```bash
+curl http://localhost:11434/api/tags
 ```
-python main.py
-```
 
-### Steps
+You should see a JSON response listing your installed models. If you get a connection error, Ollama is not running.
 
-1. **Drag and drop a PDF file** into the GUI area designated for it.
-2. **Select the translation model** from the dropdown menu.
-3. **Enter the target language** for translation.
-4. **Review the estimated cost** displayed in the GUI's console area.
-5. **Confirm to proceed** with the translation by clicking the translate button.
-6. **Open the translated text file** using the button provided once the translation is complete.
+**Note**: The Ollama desktop application typically starts automatically when you log in. The PDF GPT connects to Ollama at `http://localhost:11434` by default.
 
-## 📤 Output
+## Usage
 
-The script will save the translated text into a file named `translated_text.txt` in the script's directory. It also displays the cost details and the number of tokens used for the translation in the GUI's console.
 
-## 🖥 System Compatibility
+1. **Ensure Ollama is running** (see [Starting Ollama](#-starting-ollama) section above)
+2. **Launch the PDF GPT**:
+   ```bash
+   python main.py
+   ```
 
-- **Tested on macOS**: This application has been tested on macOS and might require modifications to run on other operating systems.
+2. **Drag and drop a PDF file** into the "PDF File" area at the top of the window
+3. **Enter the target language** (e.g., `english`, `spanish`, `german`, `french`)
+4. **Enter the Ollama model name** (e.g., `llama2`, `mistral`, `gemma3:1b`)
+   - Must be a model you've downloaded with `ollama pull`
+   - The application will verify the model exists before starting translation
+5. **Click "Translate Text"** 
+6. **When done you can open the translated file in the same directory as the original file**:
+`originalname_targetlanguage.txt`
 
-## 🤝 Contributing
 
-Contributions to enhance the script, improve efficiency, or add new features are welcome. Please fork the repository and submit a pull request with your updates.
+## Changelog
 
-## 📜 License
+### Version 0.2.0 
+- Improved UI/UX
+- Background threading to prevent freezing issues
+- Improved output file naming
+- Custom model input instead of predefined (limited) dropdown menu
+- Real-time progress tracking
+- Improved error handling and connection verification
+
+### Version 0.1.2
+- Added drag-and-drop PDF functionality
+- Added model selection dropdown
+- File output with option to open translated file
+- Basic error handling
+
+### Version 0.1.1
+- Initial release
+- Basic PDF text extraction
+- Translation using OpenAI GPT models
+- Command-line interface with basic translation functionality
+
+## Contributing
+Contributions are welcome, please raise an issue or create a pull request. :)
+
+
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
-
-For support, raise an issue in the repository.

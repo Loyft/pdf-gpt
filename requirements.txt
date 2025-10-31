@@ -1,6 +1,6 @@
 PyPDF2
-openai
+ollama
 tqdm
 colorama
-python-dotenv
 PyQt5
+requests
